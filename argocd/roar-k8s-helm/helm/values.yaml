@@ -1,0 +1,15 @@
+# Default values for roar charts.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates
+roar-db:
+  image:
+    repository: quay.io/bclaster/roar-db
+    tag: 1.0.2
+    pullPolicy: Always
+roar-web: 
+  image:
+    repository: quay.io/bclaster/roar-web
+    tag: 1.10.1
+    pullPolicy: Always
+
+  
