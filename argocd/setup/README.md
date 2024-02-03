@@ -1,6 +1,11 @@
 # Argocd
 [argocd lab setup](https://github.com/skillrepos/argo-setup)
 
+## setup kind
+```shell
+kind create cluster #--config argocd/setup/kind.yaml 
+```
+
 ## setup
 ### cleanup
 ```shell
@@ -17,6 +22,7 @@ pkill kubectl
 # ref: https://argo-cd.readthedocs.io/en/stable/getting_started/
 kubectl create ns argocd
 kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/v2.4.16/manifests/install.yaml
+
 ```
 
 ### get argocd password

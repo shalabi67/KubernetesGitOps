@@ -23,14 +23,14 @@ export CLUSTER_IP=https://kubernetes.default.svc
 https://localhost:9090
 ```
 
-### create project
+### create app
 ```shell
-argocd app create roar-deploy-k8s --repo https://github.com/brentlaster/roar-deploy-k8s --path . --dest-server $CLUSTER_IP --dest-namespace roar
+argocd app create roar-deploy-k8s --repo https://github.com/shalabi67/KubernetesGitOps --path argocd/roar-deploy-k8s --dest-server $CLUSTER_IP --dest-namespace roar
 
 # you should see the project in the browser
 ```
 
-### sync project
+### sync app
 ```shell
 export EDITOR=nano
 argocd app edit roar-deploy-k8s
@@ -45,8 +45,7 @@ argocd app sync roar-deploy-k8s
 ```shell
 kubectl get svc -n roar roar-web
 
-# Look for the port number that is between “8089:” and “/TCP”. Plug that into the URL below.
-export PORT={}
-kubectl port-forward -n roar svc/roar-web 8080:$PORT 2>&1 >/dev/null &
+kubectl port-forward -n roar svc/roar-web 8080:8089 2>&1 >/dev/null &
 
+http://localhost:8080/roar/
 ```
