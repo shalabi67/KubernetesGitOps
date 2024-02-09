@@ -1,0 +1,35 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: pricelist
+  namespace: openshift-gitops
+spec:
+  generators:
+    - git:
+        repoURL: https://github.com/christianh814/gitops-examples
+        revision: master
+        directories:
+          #- path: applicationsets/git-dir-generator/apps/*
+          - path: charts/init
+          - path: charts/ns1
+            namespace: ns1
+          - path: charts/ns2
+            namespace: ns3
+          - path: charts/ns3
+            namespace: ns3
+  template:
+    metadata:
+      name: '{{path.basename}}'
+    spec:
+      project: default
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+      source:
+        repoURL: https://github.com/christianh814/gitops-examples
+        targetRevision: master
+        path: '{{path}}'
+      destination:
+        server: https://api.cluster1.chx.osecloud.com:6443
+        namespace: pricelist
