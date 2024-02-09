@@ -1,10 +1,6 @@
 apiVersion: v2
 name: second
 description: A Helm chart for Kubernetes
-dependencies:
-  - name: first
-    repository: "file://../first"
-    version: 0.1.0
 
 type: application
 version: 0.1.0
