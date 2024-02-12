@@ -1,15 +1,15 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: monitoring
-  namespace: monitoring
+  name: cert-manager
+  namespace: cert-manager
 spec:
   generators:
     - git:
         repoURL: {{ .Values.repoURL }}
         revision: main
         directories:
-          - path: clusters/dbaas/locations/de-fra/monitoring/*
+          - path: clusters/dbaas/locations/de-fra/cert-manager/*
   template:
     metadata:
       name: '{{path.basename}}'
@@ -25,4 +25,4 @@ spec:
         path: '{{path}}'
       destination:
         server: https://kubernetes.default.svc  # TODO: we need to set actual k8s cluster
-        namespace: monitoring
+        namespace: cert-manager
