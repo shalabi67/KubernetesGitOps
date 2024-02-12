@@ -1,0 +1,12 @@
+apiVersion: v2
+name: cert-manager-trust
+description: A Helm chart for Kubernetes
+
+dependencies:
+  - name: cert-manager-trust
+    repository: https://charts.jetstack.io
+    version: v0.2.0
+
+type: application
+version: 0.1.0
+
