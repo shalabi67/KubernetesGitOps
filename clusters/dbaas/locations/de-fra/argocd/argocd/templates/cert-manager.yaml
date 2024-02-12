@@ -9,7 +9,7 @@ spec:
         repoURL: '{{ .Values.repoURL }}'
         revision: main
         directories:
-          - path: clusters/dbaas/locations/de-fra/cert-manager/*
+          - path: '{{ .Values.repoURL }}/cert-manager/*'
   template:
     metadata:
       name: '{{ .Values.name }}'
