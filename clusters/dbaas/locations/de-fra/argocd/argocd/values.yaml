@@ -1,3 +1,4 @@
 repoURL: https://github.com/shalabi67/KubernetesGitOps
 name: "{{path.basename}}"
 path: "{{path}}"
+cluster: "https://kubernetes.default.svc"

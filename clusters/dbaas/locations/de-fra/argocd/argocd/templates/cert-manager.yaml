@@ -6,7 +6,7 @@ metadata:
 spec:
   generators:
     - git:
-        repoURL: https://github.com/shalabi67/KubernetesGitOps
+        repoURL: '{{ .Values.repoURL }}'
         revision: main
         directories:
           - path: clusters/dbaas/locations/de-fra/cert-manager/*
@@ -22,9 +22,9 @@ spec:
         syncOptions:
           - CreateNamespace=true
       source:
-        repoURL: https://github.com/shalabi67/KubernetesGitOps
+        repoURL: '{{ .Values.repoURL }}'
         targetRevision: main
         path: '{{ .Values.path }}'
       destination:
-        server: https://kubernetes.default.svc  # TODO: we need to set actual k8s cluster
+        server: '{{ .Values.cluster }}' # TODO: we need to set actual k8s cluster
         namespace: cert-manager
