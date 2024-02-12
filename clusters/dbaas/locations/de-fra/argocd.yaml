@@ -1,0 +1,28 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: argocd
+  namespace: argocd
+spec:
+  generators:
+    - git:
+        repoURL: https://github.com/shalabi67/KubernetesGitOps
+        revision: main
+        directories:
+          - path: clusters/dbaas/locations/de-fra/argocd/*
+  template:
+    metadata:
+      name: '{{path.basename}}'
+    spec:
+      project: dbaas
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+      source:
+        repoURL: https://github.com/shalabi67/KubernetesGitOps
+        targetRevision: main
+        path: '{{path}}'
+      destination:
+        server: https://kubernetes.default.svc  # TODO: we need to set actual k8s cluster
+        namespace: argocd

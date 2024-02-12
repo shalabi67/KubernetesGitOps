@@ -1,0 +1,28 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: monitoring
+  namespace: monitoring
+spec:
+  generators:
+    - git:
+        repoURL: https://github.com/ionos-cloud/deployment
+        revision: main
+        directories:
+          - path: clusters/dbaas/locations/de-fra/monitoring/*
+  template:
+    metadata:
+      name: '{{path.basename}}'
+    spec:
+      project: dbaas
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+      source:
+        repoURL: https://github.com/ionos-cloud/deployment
+        targetRevision: main
+        path: '{{path}}'
+      destination:
+        server: https://kubernetes.default.svc  # TODO: we need to set actual k8s cluster
+        namespace: monitoring

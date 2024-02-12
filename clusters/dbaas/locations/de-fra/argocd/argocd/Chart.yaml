@@ -1,0 +1,7 @@
+apiVersion: v2
+name: argocd
+description: A Helm chart for argocd configurations like applicationset
+
+type: application
+version: 0.1.0
+
