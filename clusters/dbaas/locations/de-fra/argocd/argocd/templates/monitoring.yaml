@@ -1,0 +1,30 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: monitoring
+  namespace: argocd
+spec:
+  generators:
+    - git:
+        repoURL: '{{ .Values.repoURL }}'
+        revision: main
+        directories:
+          - path: '{{ .Values.repoPath }}/monitoring/*'
+  template:
+    metadata:
+      name: '{{ .Values.name }}'
+    spec:
+      project: default
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true
+      source:
+        repoURL: '{{ .Values.repoURL }}'
+        targetRevision: main
+        path: '{{ .Values.path }}'
+      destination:
+        server: '{{ .Values.cluster }}'
+        namespace: monitoring
