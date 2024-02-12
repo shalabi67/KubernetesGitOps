@@ -6,7 +6,7 @@ metadata:
 spec:
   generators:
     - git:
-        repoURL: {{ .Values.repoURL }}
+        repoURL: https://github.com/shalabi67/KubernetesGitOps
         revision: main3
         directories:
           - path: clusters/dbaas/locations/de-fra/cert-manager/*
@@ -22,7 +22,7 @@ spec:
         syncOptions:
           - CreateNamespace=true
       source:
-        repoURL: {{ .Values.repoURL }}
+        repoURL: https://github.com/shalabi67/KubernetesGitOps
         targetRevision: main4
         path: '{{path}}'
       destination:
