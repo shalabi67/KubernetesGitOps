@@ -26,5 +26,5 @@ spec:
         targetRevision: main
         path: '{{ .Values.path }}'
       destination:
-        server: '{{ .Values.cluster }}' # TODO: we need to set actual k8s cluster
+        server: '{{ .Values.cluster }}'
         namespace: cert-manager
