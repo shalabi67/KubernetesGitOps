@@ -12,7 +12,7 @@ spec:
           - path: clusters/dbaas/locations/de-fra/cert-manager/*
   template:
     metadata:
-      name: '{{path.basename}}'
+      name: '{{ .Values.name }}'
     spec:
       project: dbaas
       syncPolicy:
@@ -24,7 +24,7 @@ spec:
       source:
         repoURL: https://github.com/shalabi67/KubernetesGitOps
         targetRevision: main
-        path: '{{path}}'
+        path: '{{ .Values.path }}'
       destination:
         server: https://kubernetes.default.svc  # TODO: we need to set actual k8s cluster
         namespace: cert-manager
