@@ -1,0 +1,23 @@
+webhook:
+  groupName: dbaas-certs.ionos.com
+
+  # CRD where to write to
+  crdGroup: dbaas.ionos.com
+  crdVersion: v1alpha1
+  crdPlural: dnsendpoints
+  crdKind: DNSEndpoint
+
+  namespace: dbaas
+
+  kubeConfigName: "cert-manager-dnsendpoint-kubeconfig"
+  kubeServerName: "kubernetes"
+
+  certManager:
+    namespace: cert-manager
+    serviceAccountName: cert-manager
+
+  image:
+    repository: ghcr.io/ionos-cloud/cert-manager-webhook-dnsendpoint-cr
+    tag: v0.2.0
+    pullPolicy: IfNotPresent
+    pullSecretName: dbaas-operator-dblet-dblet-regcred

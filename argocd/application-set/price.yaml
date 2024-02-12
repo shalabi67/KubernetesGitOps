@@ -2,21 +2,14 @@ apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
   name: pricelist
-  namespace: openshift-gitops
+ # namespace: openshift-gitops
 spec:
   generators:
     - git:
         repoURL: https://github.com/christianh814/gitops-examples
-        revision: master
+        revision: main
         directories:
-          #- path: applicationsets/git-dir-generator/apps/*
-          - path: charts/init
-          - path: charts/ns1
-            namespace: ns1
-          - path: charts/ns2
-            namespace: ns3
-          - path: charts/ns3
-            namespace: ns3
+          - path: applicationsets/git-dir-generator/apps/*
   template:
     metadata:
       name: '{{path.basename}}'

@@ -1,0 +1,11 @@
+apiVersion: v2
+name: cert-manager-webhook-dnsendpoint-cr
+description: A Helm chart for Kubernetes
+dependencies:
+  - name: webhook
+    repository: oci://ghcr.io/ionos-cloud/cert-manager-webhook-dnsendpoint-cr/helm
+    version: v0.2.0
+
+type: application
+version: 0.1.0
+
