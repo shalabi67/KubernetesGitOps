@@ -9,7 +9,7 @@ spec:
         repoURL: '{{ .Values.repoURL }}'
         revision: main
         directories:
-          - path: '{{ .Values.repoURL }}/cert-manager/*'
+          - path: '{{ .Values.repoPath }}/cert-manager/*'
   template:
     metadata:
       name: '{{ .Values.name }}'
