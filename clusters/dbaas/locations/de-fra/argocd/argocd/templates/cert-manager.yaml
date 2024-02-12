@@ -19,6 +19,8 @@ spec:
         automated:
           prune: true
           selfHeal: true
+        syncOptions:
+          - CreateNamespace=true
       source:
         repoURL: {{ .Values.repoURL }}
         targetRevision: main4
