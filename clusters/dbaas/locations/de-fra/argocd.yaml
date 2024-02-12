@@ -14,7 +14,7 @@ spec:
     metadata:
       name: '{{path.basename}}'
     spec:
-      project: dbaas
+      project: default
       syncPolicy:
         automated:
           prune: true
