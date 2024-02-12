@@ -14,7 +14,7 @@ spec:
     metadata:
       name: '{{ .Values.name }}'
     spec:
-      project: dbaas
+      project: default
       syncPolicy:
         automated:
           prune: true
