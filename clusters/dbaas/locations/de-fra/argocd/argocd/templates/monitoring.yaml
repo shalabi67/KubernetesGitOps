@@ -7,7 +7,7 @@ spec:
   generators:
     - git:
         repoURL: {{ .Values.repoURL }}
-        revision: main
+        revision: main1
         directories:
           - path: clusters/dbaas/locations/de-fra/monitoring/*
   template:
@@ -21,7 +21,7 @@ spec:
           selfHeal: true
       source:
         repoURL: {{ .Values.repoURL }}
-        targetRevision: main
+        targetRevision: main2
         path: '{{path}}'
       destination:
         server: https://kubernetes.default.svc  # TODO: we need to set actual k8s cluster
