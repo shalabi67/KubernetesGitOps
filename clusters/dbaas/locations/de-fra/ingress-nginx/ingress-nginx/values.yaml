@@ -1,0 +1,9 @@
+ingress-nginx:
+  controller:
+    service:
+      externalTrafficPolicy: Cluster
+      loadBalancerIP: 10.10.10.10 # TODO: we need to set this value
+    replicaCount: 2
+    extraArgs:
+      disable-catch-all: ""
+      default-ssl-certificate: dblet-system/prod-cl308-dbaas-uf0-de-tls  # TODO: we need to fix it later on
