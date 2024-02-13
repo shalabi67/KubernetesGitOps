@@ -4,3 +4,5 @@ path: "{{path}}"
 cluster: "https://kubernetes.default.svc"
 repoPath: "clusters/dbaas/locations/de-fra"
 project: default
+branch: main
+argocdNamespace: argocd

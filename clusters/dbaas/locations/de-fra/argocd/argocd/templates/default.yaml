@@ -2,12 +2,12 @@ apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
   name: default
-  namespace: argocd
+  namespace: '{{ .Values.argocdNamespace }}'
 spec:
   generators:
     - git:
         repoURL: '{{ .Values.repoURL }}'
-        revision: main
+        revision: '{{ .Values.branch }}'
         directories:
           - path: '{{ .Values.repoPath }}/default/*'
   template:
@@ -23,7 +23,7 @@ spec:
           - CreateNamespace=true
       source:
         repoURL: '{{ .Values.repoURL }}'
-        targetRevision: main
+        targetRevision: '{{ .Values.branch }}'
         path: '{{ .Values.path }}'
       destination:
         server: '{{ .Values.cluster }}'
