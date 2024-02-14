@@ -1,0 +1,88 @@
+velero:
+  # Whether to create backupstoragelocation crd, if false => do not create a default backup location
+  backupsEnabled: true
+  # Whether to create volumesnapshotlocation crd, if false => disable snapshot feature
+  snapshotsEnabled: false
+  deployNodeAgent: false
+
+  # Init containers to add to the Velero deployment's pod spec. At least one plugin provider image is required.
+  # If the value is a string then it is evaluated as a template.
+  initContainers:
+    - name: velero-plugin-for-aws
+      image: velero/velero-plugin-for-aws:v1.7.1 # TODO v1.7.1 is expecting to change, later on we need to decide on it
+      imagePullPolicy: IfNotPresent
+      volumeMounts:
+        - mountPath: /target
+          name: plugins
+
+  configuration:
+    # Parameters for the `default` BackupStorageLocation. See
+    # https://velero.io/docs/v1.6/api-types/backupstoragelocation/
+    backupStorageLocation:
+      - provider: aws
+        name: ionos
+        bucket: velero-lb34nl18  # TODO we need to provide right value as soon as it is available
+        # default indicates this location is the default backup storage location. Optional.
+        default: true
+        config:
+          region: de  # TODO we need to provide right value as soon as it is available
+          s3Url: https://s3-eu-central-1.ionoscloud.com  # TODO we need to provide right value
+          serverSideEncryption: AES256
+          customerKeyEncryptionFile: "/credentials/backup_key"
+
+  schedules:
+    secret-backup:
+      disabled: false
+      schedule: "0 6,18 * * *"
+      useOwnerReferencesInBackup: false
+      template:
+        ttl: "240h"
+        includedNamespaces: []
+        includedResources:
+          - secrets
+          - servers.dbaas.ionos.com
+          - volumes.dbaas.ionos.com
+          - lans.dbaas.ionos.com
+
+  metrics:
+    enabled: true
+    scrapeInterval: 30s
+    scrapeTimeout: 10s
+
+    serviceMonitor:
+      enabled: true
+
+    prometheusRule:
+      enabled: true
+      spec:
+        - alert: VeleroBackupPartialFailures
+          annotations:
+            message: Velero backup {{ $labels.schedule }} has {{ $value | humanizePercentage }} partialy failed backups.
+            runbook_url: https://github.com/ionos-cloud/dbaas-ops/blob/main/alerts/VeleroBackupPartialFailures.md
+          expr: |-
+            velero_backup_partial_failure_total{schedule!=""} / velero_backup_attempt_total{schedule!=""} > 0.25
+          for: 15m
+          labels:
+            severity: warning
+            team: dbaas
+        - alert: VeleroBackupTooOld
+          annotations:
+            message: Latest Velero backup {{ $labels.schedule }} is older than 25 hours.
+            runbook_url: https://github.com/ionos-cloud/dbaas-ops/blob/main/alerts/VeleroBackupTooOld.md
+          expr: |-
+            (time() - velero_backup_last_successful_timestamp{schedule!=""}) / (60*60) > 25
+          for: 5m
+          labels:
+            severity: warning
+            team: dbaas
+
+  credentials:
+    useSecret: true
+    name: velero-credentials
+    secretContents:
+      # TODO we need to provide right value as soon as it is available, notice this is secret data we need to find how to handle it
+      cloud: |
+        [default]
+        aws_access_key_id=${s3_key}  
+        aws_secret_access_key=${s3_secret}
+      backup_key: "${sse_c_key}"
