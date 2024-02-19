@@ -21,7 +21,7 @@ pkill kubectl
 # install argocd
 # ref: https://argo-cd.readthedocs.io/en/stable/getting_started/
 kubectl create ns argocd
-kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/v2.4.16/manifests/install.yaml
+kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/v2.10.0/manifests/install.yaml
 
 ```
 

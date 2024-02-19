@@ -1,4 +1,4 @@
-repoURL: https://github.com/shalabi67/KubernetesGitOps
+repoURL: https://github.com/ionos-cloud/deployment
 name: "{{path.basename}}"
 path: "{{path}}"
 cluster: "https://kubernetes.default.svc"
@@ -6,3 +6,14 @@ repoPath: "clusters/dbaas/locations/de-fra"
 project: default
 branch: main
 argocdNamespace: argocd
+namespaces:
+  - cert-manager
+  - dblet-system
+  - default
+  - monitoring
+  - crossplane-system
+  - ingress-nginx
+  - velero
+  - dbaas-kms
+
+

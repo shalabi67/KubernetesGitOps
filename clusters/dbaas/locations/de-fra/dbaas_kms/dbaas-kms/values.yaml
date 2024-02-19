@@ -1,0 +1,5 @@
+dbaas-kms:
+  imagePullSecrets:
+    - name: regcred
+  monitoring:
+    enabled: "true"

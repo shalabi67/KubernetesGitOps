@@ -1,0 +1,8 @@
+apiVersion: v2
+name: dbaas-kms
+type: application
+version: 0.1.0
+dependencies:
+  - name: dbaas-kms
+    repository: oci://harbor.infra.cluster.ionos.com/dbaas/helm
+    version: 0.3.1
