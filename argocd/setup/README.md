@@ -24,6 +24,13 @@ kubectl create ns argocd
 kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/v2.10.0/manifests/install.yaml
 
 ```
+if you faced an error for `gtg` then add this to the deployment of the pod causing the error
+```yaml
+    env:
+    - name: ARGOCD_GPG_ENABLED
+      value: "false"
+
+```
 
 ### get argocd password
 ```shell
