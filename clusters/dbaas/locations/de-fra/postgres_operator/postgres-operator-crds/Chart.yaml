@@ -1,0 +1,9 @@
+apiVersion: v2
+name: postgres-operator-crds
+type: application
+version: 0.1.0
+dependencies:
+  - name: postgres-operator-crds
+    repository: oci://ghcr.io/ionos-cloud/dbaas-postgres-operator/helm
+    version: v1.10.0-ionos3
+

@@ -1,0 +1,16 @@
+defaultVaultConnection:
+  enabled: true
+  address: "https://10.16.124.179:8200"
+  skipTLSVerify: true
+controller:
+  manager:
+    clientCache:
+      persistenceModel: direct-encrypted
+      storageEncryption:
+        enabled: true
+        mount: demo-auth-mount
+        keyName: vso-client-cache
+        transitMount: demo-transit
+        kubernetes:
+          role: auth-role-operator
+          serviceAccount: demo-operator
