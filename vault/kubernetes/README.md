@@ -1,6 +1,8 @@
 # Vault with kind
 In this example we will install vault on kind cluster and add secrets and display them
 
+for more information see [Vault installation](https://developer.hashicorp.com/vault/tutorials/kubernetes/kubernetes-minikube-raft)
+
 ## setup
 ```shell
 helm repo add hashicorp https://helm.releases.hashicorp.com
