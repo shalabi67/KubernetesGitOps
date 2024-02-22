@@ -18,4 +18,10 @@ echo -n  generated token | base64
 ```
 
 ## install argocd and vault plugin
+```shell
+kubectl apply -f plugin/argocd-cm.yaml
+kubectl apply -f plugin/vault-secret.yaml
+helm repo add argo https://argoproj.github.io/argo-helm
+helm install argocd argo/argo-cd -n argocd -f plugin/config.yaml 
+```
 
