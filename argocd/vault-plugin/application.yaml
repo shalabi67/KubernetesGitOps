@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: 'UseVaultPlugin'
+spec:
+  project: 'default'
+  destination:
+    namespace: 'vault-plugin'
+    server: 'https://kubernetes.default.svc'
+  source:
+    path: 'argocd/vault-plugin/app'
+    repoURL: 'https://github.com/shalabi67/KubernetesGitOps'
+    targetRevision: HEAD
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

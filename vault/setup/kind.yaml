@@ -2,6 +2,8 @@ kind: Cluster
 apiVersion: kind.x-k8s.io/v1alpha4
 nodes:
   - role: control-plane
+    # https://github.com/kubernetes-sigs/kind/releases
+    image: kindest/node:v1.27.11@sha256:681253009e68069b8e01aad36a1e0fa8cf18bb0ab3e5c4069b2e65cafdd70843
     kubeadmConfigPatches:
       - |
         kind: InitConfiguration
@@ -11,4 +13,4 @@ nodes:
 name: del-lab
 networking:
   ipFamily: ipv4
-  apiServerAddress: 10.16.124.179  # my dell lab
+  apiServerAddress: 192.168.178.177  # my dell lab at home

@@ -22,7 +22,7 @@ helm install vault hashicorp/vault
 init vault you can do this from the ui also
 ```shell
 kubectl exec -ti vault-0  -- sh
-vault operator init -key-shares=1 -key-threshold=1 >cluster-keys.json
+vault operator init -key-shares=1 -key-threshold=1 -format=json
 VAULT_UNSEAL_KEY=$(jq -r ".keys_base64[]" cluster-keys.json)
 vault operator unseal $VAULT_UNSEAL_KEY
 ```
